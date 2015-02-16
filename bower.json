@@ -16,7 +16,6 @@
     "angular-touch": "~1.3.0",
     "angular-material": "^0.7.1",
     "material-design-icons": "^1.0.1",
-    "angular-material-source": "git@github.com:angular/material.git#^0.7.1",
     "angular-mocks": "~1.3.x",
 
     "normalize" : "normalize.css#^3.0.0",
