@@ -1,0 +1,95 @@
+$button-border-radius: 3px !default;
+$button-fab-border-radius: 50% !default;
+
+md-toolbar .md-button.md-THEME_NAME-theme.md-fab {
+  background-color: white;
+}
+
+.md-button.md-THEME_NAME-theme {
+  border-radius: $button-border-radius;
+
+  &:not([disabled]) {
+    &:hover, 
+    &:focus {
+      background-color: '{{background-500-0.2}}';
+    }
+  }
+
+  &.md-primary {
+    color: '{{primary-color}}';
+    &.md-raised,
+    &.md-fab {
+      color: '{{primary-contrast}}';
+      background-color: '{{primary-color}}';
+      &:not([disabled]) {
+        &:hover, 
+        &:focus {
+          background-color: '{{primary-600}}';
+        }
+      }
+    }
+  }
+
+  &.md-fab {
+    border-radius: $button-fab-border-radius;
+    background-color: '{{accent-color}}';
+    color: '{{accent-contrast}}';
+    &:not([disabled]) {
+      &:hover, 
+      &:focus {
+        background-color: '{{accent-A700}}';
+      }
+    }
+  }
+
+  &.md-raised {
+    color: '{{background-contrast}}';
+    background-color: '{{background-50}}';
+    &:not([disabled]) {
+      &:hover, 
+      &:focus {
+        background-color: '{{background-200}}';
+      }
+    }
+  }
+
+  &.md-warn {
+    color: '{{warn-color}}';
+
+    &.md-raised,
+    &.md-fab {
+      color: '{{warn-contrast}}';
+      background-color: '{{warn-color}}';
+      &:not([disabled]) {
+        &:hover, 
+        &:focus {
+          background-color: '{{warn-700}}';
+        }
+      }
+    }
+  }
+
+  &.md-accent {
+    color: '{{accent-color}}';
+
+    &.md-raised,
+    &.md-fab {
+      color: '{{accent-contrast}}';
+      background-color: '{{accent-color}}';
+      &:not([disabled]) {
+        &:hover, 
+        &:focus {
+          background-color: '{{accent-700}}';
+        }
+      }
+    }
+  }
+
+  &[disabled],
+  &.md-raised[disabled],
+  &.md-fab[disabled] {
+    color: '{{foreground-3}}';
+    background-color: transparent;
+    cursor: not-allowed;
+  }
+}

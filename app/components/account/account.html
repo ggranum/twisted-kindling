@@ -1,0 +1,62 @@
+<h2>Account</h2>
+<div layout="column">
+  <md-content md-theme="docs-dark" class="md-padding" layout="column" style="font-size:1.2em">
+    <h3 style="color:rgba(255,255,255,.98)">Profile</h3>
+
+    <div layout="row" layout-sm="column" style="font-size:1.2em">
+      <md-input-container>
+        <label>Username</label>
+        <input ng-model="profile.name">
+      </md-input-container>
+      <md-input-container>
+        <label>Email</label>
+        <input ng-model="profile.email" type="email" ng-readonly="true">
+      </md-input-container>
+    </div>
+    <div layout="row" layout-align="end end">
+      <md-button class="md-raised" ng-click="logout()">Log Out</md-button>
+    </div>
+  </md-content>
+  <md-content class="md-padding" style="border:1px solid black">
+    <h3>Change Password</h3>
+    <md-input-container flex>
+      <label>Old Password</label>
+      <input type="password" ng-model="oldpass" ng-keypress="clear()">
+    </md-input-container>
+    <div layout layout-sm="column">
+      <md-input-container flex>
+        <label>New Password</label>
+        <input type="password" ng-model="newpass" ng-keypress="clear()">
+      </md-input-container>
+      <md-input-container flex>
+        <label>Confirm New Password</label>
+        <input type="password" ng-model="confirm" ng-keypress="clear()">
+      </md-input-container>
+    </div>
+    <p class="error" ng-show="err">{{err}}</p>
+
+    <p class="good" ng-show="msg">{{msg}}</p>
+
+    <div layout="row" layout-align="end end">
+      <md-button class="md-raised" ng-click="changePassword(oldpass, newpass, confirm)">change password</md-button>
+    </div>
+  </md-content>
+  <md-content class="md-padding" style="border:1px solid black">
+    <h3>Change Email</h3>
+    <md-input-container flex>
+      <label>New Email</label>
+      <input type="email" ng-model="newEmail" ng-keypress="clear()">
+    </md-input-container>
+    <md-input-container flex>
+      <label>Password</label>
+      <input type="password" ng-model="pass">
+    </md-input-container>
+    <p class="error" ng-show="emailerr">{{emailerr}}</p>
+
+    <p class="good" ng-show="emailmsg">{{emailmsg}}</p>
+
+    <div layout="row" layout-align="end end">
+      <md-button class="md-raised" ng-click="changeEmail(pass, newEmail)">update email</md-button>
+    </div>
+  </md-content>
+</div>

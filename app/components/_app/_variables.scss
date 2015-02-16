@@ -1,0 +1,30 @@
+
+// Variable declarations ONLY. Nothing in this file should output css, as it may be included in multiple locations.
+
+
+/* Cutoff widths. 'From this to the next width definition'. Similar to bootstrap. */
+$width-sm-definition-px: 0;
+$width-lg-definition-px: 800;
+
+$viewport-width-sm-vw: 100;
+$viewport-width-lg-vw: 80;
+
+
+$font-scale-title: 2;
+$font-scale-subtitle: 1.25;
+
+
+$fontsize-normal: 125%;
+$fontsize-title: $fontsize-normal * $font-scale-title;
+$fontsize-subtitle: $fontsize-normal * $font-scale-subtitle;
+
+$tk-left-vertical-bar-width: 1em;
+$header-height: 2em;
+$subheading-height: 1.5em;
+
+$text-default-padding: 1.5em;
+$footer-height: 12em;
+
+
+/* Animations: */
+$animDuration: 0.3*1s;

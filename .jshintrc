@@ -1,0 +1,28 @@
+{
+  "globalstrict": true,
+  "debug": true,
+  "curly": true,
+  "noarg": true,
+  "laxcomma": false,
+  "noempty": true,
+  "nonbsp": true,
+  "esnext": true,
+  "browser": true,
+  "onevar": true,
+  "newcap": false,
+  "globals": {
+    "afterEach": false,
+    "angular": false,
+    "beforeEach": false,
+    "console": false,
+    "describe": false,
+    "document": false,
+    "expect": false,
+    "inject": false,
+    "it": false,
+    "jasmine": false,
+    "module": false,
+    "PubSub": false,
+    "spyOn": false
+  }
+}

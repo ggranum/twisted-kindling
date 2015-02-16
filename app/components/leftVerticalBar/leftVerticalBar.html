@@ -1,0 +1,6 @@
+<div class="tk-left-vertical-bar" ng-model="tkLeftVerticalBar" >
+  <div ng-repeat="segment in segmentClassNames track by $index"
+       class="{{segment}} md-primary"
+       style="{{autoHeight ? 'height:' +  100/segmentClassNames.length + '%' : ''}}">
+    &nbsp;</div>
+</div>

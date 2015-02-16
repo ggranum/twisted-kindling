@@ -1,0 +1,15 @@
+<md-toolbar class="header" layout="row" layout-sm="row" layout-align="center" ng-model="myAppHeader">
+  <div class="md-toolbar-tools" layout="row" layout-sm="row" layout-align="space-between">
+    <h2><span class="title-text">Home</span></h2>
+    <div layout="row" layout-align="end center">
+      <md-button href="#/account" aria-label="Account" ng-show-auth layout="row" layout-align="space-between center">
+        <md-icon class="icon-svg-24px-dims svg-ic_account_circle_24px"></md-icon>
+        <div class="header-menu-icon-label">{{profile.name}}</div>
+      </md-button>
+      <md-button href="#/login" class="md-accent" aria-label="Sign in" ng-hide-auth>Sign in</md-button>
+      <md-button class="md-accent" aria-label="Menu" ng-click="toggleRight()">
+        <md-icon class="icon-svg-24px-dims svg-ic_menu_24px"></md-icon>
+      </md-button>
+    </div>
+  </div>
+</md-toolbar>

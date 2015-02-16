@@ -1,0 +1,55 @@
+@import "tk-material-design-palette";
+
+/* Animations: */
+$animDuration: 0.3*1s !default;
+
+$tk-left-vertical-bar-width: 1em !default;
+
+$footer-height: 12em !default;
+
+$whiteframe-shadow-z1: 0px 2px 5px 0 rgba(0, 0, 0, 0.26) !default;
+$whiteframe-zindex-z1: 1 !default;
+
+/*
+* Do not import this SCSS partial as part of an app - unless of course you're desperate for IDE support. Its only purpose is to initialize default values.
+* Presumably if you are configuring your app you will be overriding these defaults by initializing the palettes correctly.
+*
+* The proper way to set up theme colors for use in SCSS is demonstrated in '_tk-palette.scss'.
+*
+* Regarding IDE support: IntelliJ does not recognize '!global' declarations in mixins, at least as of 14.0.3, so this gets rid of warnings when imported.
+*/
+/* Primary Colors */
+$map: $md-palette-definition-indigo;
+$hueSettings: $md-palette-DEFAULT_HUE_SETTINGS-LIGHT-PRIMARY;
+
+$md-palette-primary: map-get($map, map-get($hueSettings, 'default')) !default;
+$md-palette-primary-hue-1: map-get($map, map-get($hueSettings, 'hue-1')) !default;
+$md-palette-primary-hue-2: map-get($map, map-get($hueSettings, 'hue-2')) !default;
+$md-palette-primary-hue-3: map-get($map, map-get($hueSettings, 'hue-3')) !default;
+
+/* Accents */
+$map: $md-palette-definition-pink;
+$hueSettings: $md-palette-DEFAULT_HUE_SETTINGS-LIGHT-ACCENT;
+
+$md-palette-accent: map-get($map, map-get($hueSettings, 'default')) !default;
+$md-palette-accent-hue-1: map-get($map, map-get($hueSettings, 'hue-1')) !default;
+$md-palette-accent-hue-2: map-get($map, map-get($hueSettings, 'hue-2')) !default;
+$md-palette-accent-hue-3: map-get($map, map-get($hueSettings, 'hue-3')) !default;
+
+/* Backgrounds */
+$map: $md-palette-definition-grey;
+$hueSettings: $md-palette-DEFAULT_HUE_SETTINGS-LIGHT-BACKGROUND;
+
+$md-palette-background: map-get($map, map-get($hueSettings, 'default')) !default;
+$md-palette-background-hue-1: map-get($map, map-get($hueSettings, 'hue-1')) !default;
+$md-palette-background-hue-2: map-get($map, map-get($hueSettings, 'hue-2')) !default;
+$md-palette-background-hue-3: map-get($map, map-get($hueSettings, 'hue-3')) !default;
+
+/* Warnings */
+$map: $md-palette-definition-red;
+$hueSettings: $md-palette-DEFAULT_HUE_SETTINGS-LIGHT-WARN;
+
+$md-palette-warn: map-get($map, map-get($hueSettings, 'default')) !default;
+$md-palette-warn-hue-1: map-get($map, map-get($hueSettings, 'hue-1')) !default;
+$md-palette-warn-hue-2: map-get($map, map-get($hueSettings, 'hue-2')) !default;
+$md-palette-warn-hue-3: map-get($map, map-get($hueSettings, 'hue-3')) !default;

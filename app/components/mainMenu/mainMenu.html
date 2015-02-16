@@ -1,0 +1,29 @@
+<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right" ng-model="mainMenu">
+  <md-toolbar class="md-theme-light">
+    <h1 class="md-toolbar-tools">Menu</h1>
+  </md-toolbar>
+  <md-content class="sidenav-menu md-padding md-list" layout="column">
+    <md-list layout="column">
+      <md-item ng-repeat="item in items" layout="row" flex>
+        <md-button aria-label="{{item.name}}" ng-click="menuItemClick($index)" layout="row" layout-align="start center">
+          <md-icon class="icon-svg-24px-dims {{item.iconClass}}"></md-icon>
+          <div class="sidenav-menu-icon-label">{{ item.name }}</div>
+        </md-button>
+      </md-item>
+      <md-item ng-controller="TkFooterController">
+        <md-button class="md-primary" ng-click="showGridBottomSheet($event)">
+          Show BottomSheet
+        </md-button>
+        <b layout="row" layout-align="center center" layout-margin>
+          {{alert}}
+        </b>
+      </md-item>
+      <md-item>
+        <md-button ng-click="close()" class="md-primary">
+          Close Sidenav Right
+        </md-button>
+      </md-item>
+    </md-list>
+  </md-content>
+
+</md-sidenav>

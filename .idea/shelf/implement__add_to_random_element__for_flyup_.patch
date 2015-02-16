@@ -1,0 +1,42 @@
+Index: app/components/home/home.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/components/home/home.html	(date 1423180035000)
++++ app/components/home/home.html	(revision )
+@@ -26,6 +26,34 @@
+   tristique ipsum viverra at. Nam libero tortor, vehicula eu tincidunt id, blandit et purus. Nulla metus velit, vulputate ac nibh in, hendrerit aliquet tellus.
+   Donec fermentum nulla sed nulla placerat condimentum. Pellentesque pellentesque tortor sed nibh aliquam, aliquam eleifend libero fringilla.
+ </p>
++
++<div style="margin:2em;height:400px;left:0;right:0;border:1px solid blue">
++
++  <flyup-footer opened="true" toggle-on-scroll="true" start-closed="1000" min-scroll-delta="20">
++    <div class="tk-footer-body md-bottom-sheet md-grid">
++      <md-list>
++        <md-item>
++          <md-button class="md-grid-item-content" aria-label="Hangout" ng-click="listItemClick($index)">
++            <div class="md-icon-container">
++              <md-inline-grid-icon icon="hangout"></md-inline-grid-icon>
++            </div>
++            <p class="md-grid-text">Hangout</p>
++          </md-button>
++        </md-item>
++        <md-item>
++          <md-button class="md-grid-item-content" aria-label="Mail" ng-click="listItemClick($index)">
++            <div class="md-icon-container">
++              <md-inline-grid-icon icon="mail"></md-inline-grid-icon>
++            </div>
++            <p class="md-grid-text">Mail</p>
++          </md-button>
++        </md-item>
++      </md-list>
++    </div>
++  </flyup-footer>
++
++</div>
++
+ <p>
+   Nulla imperdiet ultricies magna, at bibendum nisi malesuada ac. Morbi tempus dui vitae est commodo, et sagittis risus tincidunt. Class aptent taciti sociosqu
+   ad litora torquent per conubia nostra, per inceptos himenaeos. In vitae tellus id sem imperdiet facilisis. Vestibulum feugiat interdum porta. Suspendisse

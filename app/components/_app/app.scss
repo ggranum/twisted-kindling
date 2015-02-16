@@ -1,0 +1,120 @@
+// SCSS Layout inspired by: http://thesassway.com/beginner/how-to-structure-a-sass-project
+@import "variables";
+@import "palette";
+@import "../_twistedKindling/twisted_kindling";
+@import "../header/header";
+@import "../home/home";
+@import "../mainMenu/mainMenu";
+@import "../chat/chat";
+
+html {
+  font-size: 10px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: 1.42857143;
+  color: #333333;
+  background-color: #fff;
+
+}
+
+.main-view {
+  display: flex;
+  flex-flow: column nowrap;
+  max-width: $viewport-width-sm-vw *1vw;
+  margin: 0 auto 0 auto;
+  height: 100%;
+  bottom: 0;
+}
+
+.header {
+  font-size: $fontsize-title;
+  width: $viewport-width-sm-vw * 1vw;
+  margin: 0 auto 0 auto;
+  overflow: hidden;
+  box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.26);
+  .md-toolbar-tools {
+    padding: 0;
+  }
+  .title-text {
+    padding-left: $text-default-padding/$font-scale-title;
+    margin-top: .5em;
+  }
+
+  .icon-svg-24px-dims {
+    filter: invert(100%);
+  }
+
+  .md-button {
+    margin: 1em;
+  }
+
+  .md-button .header-menu-icon-label {
+    margin-left: 1em;
+  }
+
+}
+
+.sidenav-menu{
+  md-icon {
+    margin-right: 1em;
+  }
+  .sidenav-menu-icon-label {
+
+  }
+}
+.icon-svg-24px-dims {
+  width: 24px;
+  height: 24px;
+}
+.sub-header {
+  font-size: $fontsize-subtitle;
+  max-width: $viewport-width-sm-vw *1vw;
+  max-height: 1.5em;
+  padding-left: $text-default-padding/$font-scale-subtitle;
+}
+
+.body-container {
+  $mTop: $header-height + $subheading-height;
+  display: flex;
+  flex-flow: column nowrap;
+  font-size: $fontsize-normal;
+  margin: $mTop auto 0 auto;
+  padding-left: $text-default-padding;
+  padding-right: $text-default-padding;
+  overflow-x: hidden;
+}
+
+.body-panel {
+  display: flex;
+  flex-flow: column nowrap;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+md-bottom-sheet {
+  width: $viewport-width-sm-vw *1vw;
+  margin: 0 auto 0 auto;
+}
+
+@media (min-width: $width-lg-definition-px * 1px) {
+  .main-view {
+    max-width: $viewport-width-lg-vw *1vw;
+  }
+  .header {
+    width: $viewport-width-lg-vw * 1vw;
+  }
+  .body-container {
+    max-width: $viewport-width-lg-vw *1vw;
+  }
+
+  md-bottom-sheet {
+    width: $viewport-width-lg-vw *1vw;
+    margin: 0 auto 0 auto;
+    background-color: transparent;
+
+
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "motd": {
+      ".read": true,
+      ".write": true,
+      ".validate": "newData.isString() && newData.val().length <= 100"
+    },
+    "messages": {
+      ".read": true,
+      "$message": {
+        ".write": true,
+        ".validate": "newData.hasChildren(['text', 'uid'])",
+        "uid": {
+          ".validate": "auth.uid === newData.val()"
+        },
+        "text": {
+          ".validate": "newData.isString() && newData.val().length <= 1000"
+        },
+        "when": {
+          ".validate": "newData.isNumber()"
+        },
+        "$other": {
+          ".validate": false
+        }
+      }
+    },
+    "users": {
+      "$user": {
+        ".read": "true",
+        ".write": "auth.uid === $user && (!newData.exists() || newData.hasChildren())",
+        "name": {
+          ".validate": "newData.isString() && newData.val().length <= 2000"
+        },
+        "email": {
+          ".read": "auth.uid === $user",
+          ".validate": "newData.isString() && newData.val().length <= 2000"
+        },
+        "avatar": {
+          ".validate": "newData.isString() && newData.val().length <= 100"
+        },
+        "$other": {
+          ".validate": false
+        }
+      }
+    }
+  }
+}

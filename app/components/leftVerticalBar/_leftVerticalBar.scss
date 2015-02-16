@@ -1,0 +1,32 @@
+@import "../_twistedKindling/tk-defaults";
+
+.tk-left-vertical-bar {
+  position: fixed;
+  z-index: 100;
+  width: $tk-left-vertical-bar-width;
+  margin: 0 auto 0 auto;
+  top: 0;
+  bottom: 0;
+  padding: 0;
+  background-color: transparent;
+
+  /*
+  * This is a simple example. Consider gradients, drop shadows, etc if you want something more fancy.
+  */
+
+  .tk-bar-segment-hue-1 {
+    background-color: $md-palette-primary-hue-1
+  }
+
+  .tk-bar-segment-hue-2 {
+    background-color: $md-palette-primary-hue-2
+  }
+
+  .tk-bar-segment-hue-3 {
+    background-color: $md-palette-primary-hue-3
+  }
+  .tk-bar-segment-default {
+    background-color: $md-palette-primary
+  }
+
+}
