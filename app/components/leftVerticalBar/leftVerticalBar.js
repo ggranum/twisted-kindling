@@ -1,9 +1,9 @@
 (function () {
   "use strict";
 
-  var leftVerticalBar = angular.module('twisted.components.leftVerticalBar', ['material.core']);
+  var leftVerticalBar = angular.module('myApp.leftVerticalBar', ['material.core']);
 
-  leftVerticalBar.directive('tkLeftVerticalBar', ['$mdTheming', function ($mdTheming) {
+  leftVerticalBar.directive('myAppLeftVerticalBar', ['$mdTheming', function ($mdTheming) {
 
       return {
         restrict: 'E',

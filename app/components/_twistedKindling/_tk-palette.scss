@@ -1,9 +1,18 @@
+/****************************************************************************
+*
+* Configuring your Material Design color palette for use in SCSS:
+*
+* Please note that SCSS theming for Material Design is somewhat experimental, is NOT supported by
+* the Material Design team, and probably would be discouraged by the Material Design team.
+*
+* Copy and paste this entire file into your own application structure and include the copy in
+* your main SCSS file if you want to change your color scheme.
+*
+* You will also need to set the runtime theme colors using Angular Theming (see /components/_app/app.js).
+*
+*****************************************************************************/
 @import "tk-material-design-palette";
 
-/*
-* Copy and paste this file into your own application structure and include the copy in your main SCSS file if you want to change your color scheme.
-* Note that you will need to choose the same colors using the Angular Theming (see /components/_app/app.js)
-*/
 
 @include mdDefineTheme('default', (
     'primary': (

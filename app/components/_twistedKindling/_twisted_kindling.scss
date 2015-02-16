@@ -1,3 +1,11 @@
-@import "tk-material-design-palette";
+/****************************************************************************
+ *
+ * Import this file into you main scss file. Also examine _tk-palette.scss,
+ * if you wish to configure your color palette.
+ *
+ * This partial includes all the partials you will need to support the
+ * twisted-kindling seed application, with the exception of color palette configuration.
+ *
+ *****************************************************************************/
 @import "../_twistedKindling/materialDesignHacks";
-@import "../_twistedKindling/tk-components";
+@import "tk-defaults";

@@ -1,8 +1,16 @@
 
+/*
+* What does setting height on the html element even do?
+* @workaround https://github.com/angular/material/issues/681
+*/
 html {
   height: auto;
 }
 
+/*
+* Material Design sets the height to 100% on body by default. This breaks mobile devices, preventing the address bar from ever hiding.
+* @workaround https://github.com/angular/material/issues/681
+*/
 body {
   height: auto;
 }

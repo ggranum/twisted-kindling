@@ -31,7 +31,7 @@
       };
     }]);
 
-  module.directive('mainMenu', [function () {
+  module.directive('myAppMainMenu', [function () {
       return {
         restrict: 'E',
         templateUrl: '/components/mainMenu/mainMenu.html',

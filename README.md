@@ -1,53 +1,79 @@
-# angularfire-component-seed — yet-another-seed for Angular+Firebase apps
-This is a component-oriented version of the Angularfire seed project.
+# Twisted-Kindling: An Angular+AngularFire+Material Design starter of fires.
 
-The major differences (and they are quite major) between this fork and the parent projects are:
-- Grunt based build. This is a fully configured build, including linting, minification and SASS
-compilation.
-- A Component-oriented project layout. This is the most significant difference, by far.
+This seed project extends the (excellent) [angularfire-seed][AngularFire-Seed] project created by the AngularFire team.
+
+What's different? Well, start by checking out the [demo][demo].
+
+Behind the scenes, we've got much more:
+ - Swap out the NPM build targets for Grunt, including minification, SASS, linting, Live-Reload, and more.
+ - Component Oriented: the file system is aligned with how you develop your app, not Angular nouns. Currently this seed doesn't use nested directories
+ under the primary 'components' directory, but it should be possible to augment the build system to handle it fairly easily. Consider it a todo item.
+ - Material Design.
+ - More fully functional authentication and user profile model.
+
+# Features
+
+## Component Oriented build and file system
 
 Rather than group project files by what their function is (controller, view, model, service) we
 group the file structure by component:
 
-    app/                      --> all of the files to be used in production
-      bower_components/ {...} --> Third party libraries
-      components/             --> Your application views / widgets / components / partials
-        _base/                --> Primary configuration and shared globals, such as filters
-          base.js             -->
-          base.spec.js        --> Unit tests for 'base'
-          config.js           --> A configuration module
-          config.spec.js      -->
-          firebase.utils.js   --> Some shared firebase factories
-          routes.js           --> Route configuration for the entire application.
-        account/              --> The Account view and module.
-          account.html        -->
-          account.js          -->
-          account.spec.js     -->
-          changeEmail.js      -->
-        chat/                 --> The Chat view and module.
-          chat.html           -->
-          chat.js             -->
-          chat.spec.js        -->
-        home/                 --> The Home page view and module.
-          home.html           -->
-          home.js             -->
-          home.spec.js        -->
-        login/                -->  The Login view and module, and some firebase specific adaptors for 'SimpleLogin' functionality.
-          login.html          -->
-          login.js            -->
-          login.spec.js       -->
-          simpleLogin.js      -->
-          simpleLogin.spec.js -->
-      app.css                 --> default global stylesheet
-      index.html              --> app layout file (the main html template file of the app)
-      index-async.html        --> just like index.html, but loads js files asynchronously
-    test/                     --> test config and source files
-      protractor-conf.js      --> config file for running e2e tests with Protractor
-      e2e/                    --> end-to-end specs
+    app/                                       --> all of the files to be used in production
+      bower_components/ {...}                  --> Third party libraries
+      components/                              --> Your application views / widgets / components / partials
+        _app/                                  --> Primary configuration and shared globals, such as filters
+          app.js                               -->
+          app.scss                              -> Primary SCSS source. Import all components, etc.
+          app.spec.js                          --> Unit tests for 'base'
+          config.js                            --> A configuration module
+          config.spec.js                       -->
+          firebase.utils.js                    --> Some shared firebase factories
+          routes.js                            --> Route configuration for the entire application.
+          _palette.scss                        --> Your configure the color palette for your application's CSS.
+          _variables.scss                      --> Configure your SCSS variables, such as proportional widths, heights etc.
+        _twistedKindling/                      --> Supporting code that you aren't expected to need to edit. (this may become a separate bower project)
+          experiments/                         --> You can ignore this folder for now. Discussion to come.
+          _twisted_kindling.scss               --> Import this file in your primary scss file (see app.scss).
+          _materialDesignHacks.scss/           --> Workarounds for issues found in the material design styles. See comments in the file.
+          _tk-components.scss                  -->
+          _tk-defaults.scss                    -->
+          _tk-material-design-palette.scss     -->
+          _tk-palette.scss                     -->
+          twistedKindling.js                   --> The main Angular module for twistedKindling. Does nothing, actually. Something to @revisit
+        account/                               --> The Account view and module. Change account username, email and password. P
+          account.html                         -->
+          account.js                           -->
+          account.spec.js                      -->
+          changeEmail.js                       -->
+        chat/                                  --> The Chat view and module.
+          _chat.scss                           -->
+          chat.html                            -->
+          chat.js                              -->
+          chat.spec.js                         -->
+        footer/                                --> A wrapper around MD's 'BottomSheet'.
+        header/                                --> A global header, with title and nav menu.
+        home/                                  --> The Home page view and module. Show Message of the Day. Part of 'myApp'.
+          home.html                            -->
+          home.js                              -->
+          home.spec.js                         -->
+        leftVerticalBar/                       --> Color bar widget for the left side of the app. Common in a number of mobile apps.
+        login/                                 --> The Login view and module, and some firebase specific adaptors for 'SimpleLogin' functionality.
+          login.html                           -->
+          login.js                             -->
+          login.spec.js                        -->
+          simpleLogin.js                       -->
+          simpleLogin.spec.js                  -->
+        mainMenu/                              --> Currently implemented as a Material Design right-nav, will be updated once MD releases a Menu component.
+      app.iml                                  --> IntelliJ project file.
+      index.html                               --> app layout file (the main html template file of the app)
+      index-async.html                         --> Not supported! But maybe one day. Supposed to be just like index.html, but loading js files asynchronously.
+    test/                                      --> test config and source files
+      protractor-conf.js                       --> config file for running e2e tests with Protractor
+      e2e/                                     --> end-to-end specs
         scenarios.js
-      karma.conf.js           --> config file for running unit tests with Karma
+      karma.conf.js                            --> config file for running unit tests with Karma
 
-## Reasoning
+### Reasoning
 The future of web development is heading towards componentization at a fairly rapid clip.
 There are very sound reasons for this. In particular, keeping all assets associated with one and
 only one component (such as a view) 'near to' one another lends to easier editing of that asset.
@@ -374,7 +400,9 @@ check out https://firebase.com/docs/web/bindings/angular
 
 For more information on AngularJS please check out http://angularjs.org/
 
+[angularfire-seed]: https://github.com/firebase/angularfire-seed
 [git]: http://git-scm.com/
+[demo]: http://twisted-kindling.firebaseio.com
 [bower]: http://bower.io
 [npm]: https://www.npmjs.org/
 [node]: http://nodejs.org

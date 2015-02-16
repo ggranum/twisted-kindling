@@ -37,12 +37,12 @@
 
 
   <div class="main-view" ng-controller="AppController">
-    <tk-left-vertical-bar auto-height="true" segment-class-names="['tk-bar-segment-default', 'tk-bar-segment-hue-1']"></tk-left-vertical-bar>
+    <my-app-left-vertical-bar auto-height="true" segment-class-names="['tk-bar-segment-default', 'tk-bar-segment-hue-1']"></my-app-left-vertical-bar>
 
     <my-app-header></my-app-header>
 
     <!-- Right sidenav until md-menu is implemented. -->
-    <main-menu></main-menu>
+    <my-app-main-menu></my-app-main-menu>
 
     <!-- Ugly but functional sub-header menu. -->
     <div class="sub-header">
@@ -74,9 +74,9 @@
   <script src="components/_app/config.js"></script>
   <script src="components/_app/routes.js"></script>
   <script src="components/_app/firebase.utils.js"></script>
-  <script src="components/_twistedKindling/twistedKindling.js"></script>
-  <script src="components/leftVerticalBar/leftVerticalBar.js" type="text/javascript"></script>
 
+
+  <script src="components/leftVerticalBar/leftVerticalBar.js" type="text/javascript"></script>
   <script src="components/header/header.js" type="text/javascript"></script>
   <script src="components/mainMenu/mainMenu.js" type="text/javascript"></script>
   <script src="components/footer/footer.js" type="text/javascript"></script>

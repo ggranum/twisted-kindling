@@ -4,18 +4,17 @@
   // Declare app level module which depends on filters, and services
   var myApp = angular.module('myApp', [
     'ngMaterial',
-    'twisted',
-    'twisted.components',
-    'twisted.components.leftVerticalBar',
-    'myApp.mainMenu',
-    'myApp.header',
+    'myApp.routes',
     'myApp.config',
+    'myApp.home',
+    'myApp.leftVerticalBar',
+    'myApp.footer',
+    'myApp.header',
+    'myApp.mainMenu',
     'myApp.core',
     'myApp.account',
     'myApp.login',
-    'myApp.home',
-    'myApp.chat',
-    'myApp.routes'
+    'myApp.chat'
   ]);
 
   myApp.config(function ($mdThemingProvider) {

@@ -1,7 +1,7 @@
 (function () {
   "use strict";
-  angular.module('twisted.components.footer', ['ngMaterial'])
-    .controller('TkFooterController', function ($scope, $timeout, $mdBottomSheet) {
+  angular.module('myApp.footer', ['ngMaterial'])
+    .controller('FooterController', function ($scope, $timeout, $mdBottomSheet) {
       $scope.alert = '';
       $scope.showGridBottomSheet = function ($event) {
         $scope.alert = '';

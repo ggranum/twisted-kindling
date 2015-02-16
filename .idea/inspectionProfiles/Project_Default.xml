@@ -64,7 +64,7 @@
     <inspection_tool class="HtmlUnknownTag" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="myValues">
         <value>
-          <list size="87">
+          <list size="89">
             <item index="0" class="java.lang.String" itemvalue="nobr" />
             <item index="1" class="java.lang.String" itemvalue="noembed" />
             <item index="2" class="java.lang.String" itemvalue="comment" />
@@ -152,6 +152,8 @@
             <item index="84" class="java.lang.String" itemvalue="md-icon" />
             <item index="85" class="java.lang.String" itemvalue="tk-main-menu" />
             <item index="86" class="java.lang.String" itemvalue="md-item-content" />
+            <item index="87" class="java.lang.String" itemvalue="my-app-left-vertical-bar" />
+            <item index="88" class="java.lang.String" itemvalue="my-app-main-menu" />
           </list>
         </value>
       </option>

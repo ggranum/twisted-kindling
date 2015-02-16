@@ -1,3 +1,10 @@
+/****************************************************************************
+ *
+ * DO NOT IMPORT DIRECTLY.
+ *
+ * This partial is already included as part of _twisted_kindling.scss,
+ * which is what should be @imported in your application's main scss file.
+ *****************************************************************************/
 @import "tk-material-design-palette";
 
 /* Animations: */
@@ -11,12 +18,10 @@ $whiteframe-shadow-z1: 0px 2px 5px 0 rgba(0, 0, 0, 0.26) !default;
 $whiteframe-zindex-z1: 1 !default;
 
 /*
-* Do not import this SCSS partial as part of an app - unless of course you're desperate for IDE support. Its only purpose is to initialize default values.
-* Presumably if you are configuring your app you will be overriding these defaults by initializing the palettes correctly.
-*
+* This is NOT the proper way to set up a color palette. Its only purpose is to provide correct IntelliSense support in IntelliJ.
 * The proper way to set up theme colors for use in SCSS is demonstrated in '_tk-palette.scss'.
 *
-* Regarding IDE support: IntelliJ does not recognize '!global' declarations in mixins, at least as of 14.0.3, so this gets rid of warnings when imported.
+* Regarding IDE support: IntelliJ does not recognize '!global' declarations in mixins, at least as of 14.0.3, so the below gets rid of those warnings.
 */
 /* Primary Colors */
 $map: $md-palette-definition-indigo;
