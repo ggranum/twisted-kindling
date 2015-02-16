@@ -10,6 +10,7 @@ module.exports = function (grunt) {
     paths: {
       rel: {
         bower: 'bower_components/',
+        materialDesignIcons: 'bower_components/material-design-icons/sprites/svg-sprite/',
         components: 'components/',
         static: 'static/'
       },
@@ -65,8 +66,8 @@ module.exports = function (grunt) {
       ownHtml: [appConfig.paths.rel.components + '**/*.html', './*.html'],
       allStatic: [appConfig.paths.rel.static + '**/*'],
       allSass: [appConfig.paths.rel.components + '**/*.{scss,_scss}', appConfig.paths.rel.static + '**/*.{scss,_scss}', '*.scss'],
-      builtExpandedCss: [appConfig.paths.rel.components + '**/*([^.]).css', '*([^.]).css'],
-      builtMinifiedCss: [appConfig.paths.rel.components + '**/*.min.css', '*.min.css']
+      builtExpandedCss: [appConfig.paths.rel.static + '**/*([^.]).css', '*([^.]).css'],
+      builtMinifiedCss: [appConfig.paths.rel.static + '**/*.min.css', '*.min.css']
     },
 
     specTests: [appConfig.paths.app + '**/*.spec.js'],
@@ -310,7 +311,7 @@ module.exports = function (grunt) {
         assetsDirs: [appConfig.paths.dist]
       },
       html: [appConfig.paths.dist + '**/*.html'],
-      css: appConfig.globs.abs.builtExpandedCss
+      css: [appConfig.paths.dist + '**/*.css']
     },
 
     /**
@@ -398,6 +399,12 @@ module.exports = function (grunt) {
               appConfig.globs.rel.ownHtml,
               appConfig.globs.rel.allStatic
             ]
+          },
+          {
+            expand: true,
+            cwd: appConfig.paths.app + appConfig.paths.rel.materialDesignIcons,
+            dest: appConfig.paths.dist + 'static/md-icons/',
+            src: '*.svg'
           }
         ]
       }
@@ -453,8 +460,6 @@ module.exports = function (grunt) {
     // Run some tasks in parallel to speed up build process
     concurrent: {
       dist: [
-        'sass:dev',
-        'sass:dist',
         'imagemin',
         'svgmin'
       ]
@@ -498,14 +503,16 @@ module.exports = function (grunt) {
    * Performs a clean and a full build (minimize, inject, concat, optimize, etc), but runs no tests.
    */
   grunt.registerTask('build', [
+    'clean:staging',
     'clean:dist',
     'useminPrepare',
+    'sass:dev',
     'concurrent:dist',
     'autoprefixer',
+    'copy:dist',
     'concat',
     'cssmin',
     'uglify',
-    'copy:dist',
     'rev',
     'usemin',
     'htmlmin'

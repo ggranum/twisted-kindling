@@ -17,21 +17,22 @@
     'myApp.chat'
   ]);
 
-  myApp.config(function ($mdThemingProvider) {
+  myApp.config(["$mdThemingProvider", function ($mdThemingProvider) {
 
     $mdThemingProvider.theme('default')
       .primaryPalette('indigo')
       .accentPalette('pink');
-  });
+  }]);
 
-  myApp.controller('AppController', function ($scope, $timeout, $mdSidenav, $log) {
+  myApp.controller('AppController',
+    ["$scope", "$timeout", "$mdSidenav", "$log", function ($scope, $timeout, $mdSidenav, $log) {
     $scope.toggleRight = function () {
       $mdSidenav('right').toggle()
         .then(function (foo) {
           $log.debug("toggle RIGHT is done");
         });
     };
-  });
+  }]);
 
   var core = angular.module('myApp.core', []);
 
