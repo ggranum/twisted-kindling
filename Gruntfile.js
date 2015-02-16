@@ -394,7 +394,6 @@ module.exports = function (grunt) {
             cwd: appConfig.paths.app,
             dest: appConfig.paths.dist,
             src: [
-              '**/*.{ico,png,txt,webp}',
               '.htaccess',
               appConfig.globs.rel.ownHtml,
               appConfig.globs.rel.allStatic
