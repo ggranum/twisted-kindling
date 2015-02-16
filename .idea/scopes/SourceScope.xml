@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="SourceScope" pattern="(file[myApp]:*/||file[app]:*/)&amp;&amp;!file[myApp]:.idea/*&amp;&amp;!file[myApp]:node_modules/*&amp;&amp;!file[myApp]:node_modules//*&amp;&amp;!file[myApp]:.idea//*&amp;&amp;!file[app]:bower_components//*&amp;&amp;!file[myApp]:.tmp//*&amp;&amp;!file[app]:**/*.css&amp;&amp;!file[app]:**/*.map" />
+</component>
