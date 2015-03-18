@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-angular.module('simpleLogin', ['firebase', 'firebase.utils', 'changeEmail'])
+angular.module('simpleLogin', ['firebase', 'changeEmail', 'myApp.config'])
 
   // a simple wrapper on simpleLogin.getUser() that rejects the promise
   // if the user does not exists (i.e. makes user required)
@@ -12,9 +12,9 @@ angular.module('simpleLogin', ['firebase', 'firebase.utils', 'changeEmail'])
     };
   }])
 
-  .factory('simpleLogin', ['$firebaseAuth', 'fbutil', 'createProfile', 'changeEmail',
-    function($firebaseAuth, fbutil, createProfile, changeEmail) {
-      var auth = $firebaseAuth(fbutil.ref());
+  .factory('simpleLogin', ['$firebaseAuth', 'FBURL', 'createProfile', 'changeEmail',
+    function($firebaseAuth, FBURL, createProfile, changeEmail) {
+      var auth = $firebaseAuth(new Firebase(FBURL));
       var listeners = [];
 
       function statusChange() {
@@ -95,9 +95,10 @@ angular.module('simpleLogin', ['firebase', 'firebase.utils', 'changeEmail'])
       return fns;
     }])
 
-  .factory('createProfile', ['fbutil', '$q', '$timeout', function(fbutil, $q, $timeout) {
+  .factory('createProfile', ['FBURL', '$q', '$timeout', function(FBURL, $q, $timeout) {
     return function(id, email, name, avatar) {
-      var ref = fbutil.ref('users', id), def = $q.defer();
+      var ref = new Firebase(FBURL + '/users/' +  id);
+      var def = $q.defer();
       ref.set({email: email, avatar: avatar||'default',  name: name||firstPartOfEmail(email)}, function(err) {
         $timeout(function() {
           if( err ) {

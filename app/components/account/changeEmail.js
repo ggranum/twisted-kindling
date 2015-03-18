@@ -1,8 +1,8 @@
 (function () {
   "use strict";
 
-angular.module('changeEmail', ['firebase.utils'])
-  .factory('changeEmail', ['fbutil', '$q', '$rootScope', function(fbutil, $q, $rootScope) {
+angular.module('changeEmail', ['firebase'])
+  .factory('changeEmail', ['FBURL', '$q', '$rootScope', function(FBURL, $q, $rootScope) {
     return function(password, oldEmail, newEmail, simpleLogin) {
       var ctx = { old: { email: oldEmail }, curr: { email: newEmail } };
 
@@ -38,7 +38,7 @@ angular.module('changeEmail', ['firebase.utils'])
 
       function loadOldProfile() {
         var def = $q.defer();
-        ctx.old.ref = fbutil.ref('users', ctx.old.uid);
+        ctx.old.ref = new Firebase(FBURL + '/users/' + ctx.old.uid);
         ctx.old.ref.once('value',
           function(snap){
             var dat = snap.val();
@@ -64,7 +64,7 @@ angular.module('changeEmail', ['firebase.utils'])
 
       function copyProfile() {
         var d = $q.defer();
-        ctx.curr.ref = fbutil.ref('users', ctx.curr.uid);
+        ctx.curr.ref = new Firebase(FBURL + '/users/' + ctx.curr.uid);
         var profile = {email: ctx.curr.email, name: ctx.old.name||''};
         ctx.curr.ref.set(profile, function(err) {
           if (err) {

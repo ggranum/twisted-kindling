@@ -1,6 +1,6 @@
 module.exports = function(config){
   config.set({
-
+    logLevel: 'LOG_DEBUG',
     basePath : '../',
 
     files : [
@@ -13,6 +13,9 @@ module.exports = function(config){
       'app/bower_components/mockfirebase/browser/mockfirebase.js',
       'app/bower_components/angularfire/dist/angularfire.js',
       'test/lib/**/*.js',
+      'app/components/_app/app.js',
+      /* Files are imported/included in the order found by these globs, and multi-match globs are resolved in alphabetical order.
+      * Resolve order conflicts by specifically including the js file that needs to be loaded first above this comment. */
       'app/components/**/*.js'
     ],
 

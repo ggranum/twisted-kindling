@@ -3,6 +3,7 @@
 
   // Declare app level module which depends on filters, and services
   var myApp = angular.module('myApp', [
+    'ngAria',
     'ngMaterial',
     'myApp.routes',
     'myApp.config',
@@ -44,12 +45,12 @@
     }]);
 
   core.factory('messageListFactory', [
-    'fbutil', function (fbutil) {
-      return fbutil.syncArray('messages', {limitToLast: 10, endAt: null});
+    '$firebaseArray', 'FBURL', function ($firebaseArray, FBURL) {
+      return $firebaseArray(new Firebase(FBURL + '/messages').limitToLast(10).endAt(null));
     }]);
 
   core.factory("userFactory", [
-    '$q', 'simpleLogin', 'fbutil', function ($q, simpleLogin, fbutil) {
+    '$q', 'simpleLogin', '$firebaseObject', 'FBURL', function ($q, simpleLogin, $firebaseObject, FBURL) {
       function current(){
         var userPromise = simpleLogin.getUser();
         return userPromise.then(function (authUser) {
@@ -57,7 +58,7 @@
           if (authUser) {
             // equivalent to calling (assuming you inject all the extra parameters):
             // "profile = $firebase(new $window.Firebase([FBURL, 'users', authUser.uid].join('/'))).$asObject();"
-            profile = fbutil.syncObject(['users', authUser.uid]).$loaded();
+            profile = $firebaseObject(new Firebase(FBURL + '/users/' + authUser.uid)).$loaded();
           } else {
             profile = $q.when(null);
           }
@@ -65,7 +66,7 @@
         });
       }
       function getUser(uid){
-        return fbutil.syncObject(['users', uid]).$loaded();
+        return $firebaseObject(new Firebase(FBURL + '/users/' + uid)).$loaded();
       }
 
 

@@ -1,9 +1,9 @@
 (function () {
   "use strict";
-  var module = angular.module('myApp.header', ['firebase.utils', 'simpleLogin']);
+  var module = angular.module('myApp.header', ['firebase', 'simpleLogin']);
 
   module.controller('HeaderMenuController', [
-    '$scope', 'fbutil', 'userFactory', function ($scope, fbutil, userFactory) {
+    '$scope', 'userFactory', function ($scope, userFactory) {
       userFactory.current().then(function (profile) {
         if (profile) {
           profile.$bindTo($scope, 'profile');

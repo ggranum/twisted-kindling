@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  angular.module('myApp.chat', ['firebase.utils', 'simpleLogin'])
+  angular.module('myApp.chat', ['firebase', 'simpleLogin'])
     .controller('ChatCtrl', [
       '$scope', 'userFactory', 'messageListFactory', function ($scope, userFactory, messageListFactory) {
         function applyUserData(localMsg) {

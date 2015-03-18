@@ -1,10 +1,10 @@
 (function () {
   "use strict";
 
-angular.module('myApp.home', ['firebase.utils', 'simpleLogin'])
+angular.module('myApp.home', ['firebase', 'simpleLogin', 'myApp.config'])
   .controller('HomeCtrl', [
-    '$scope', 'fbutil', 'user', 'FBURL', function ($scope, fbutil, user, FBURL) {
-      $scope.motd = fbutil.syncObject('motd');
+    '$scope', '$firebaseObject', 'user', 'FBURL', function ($scope, $firebaseObject, user, FBURL) {
+      $scope.motd = $firebaseObject(new Firebase( FBURL + '/motd'));
       $scope.user = user;
       $scope.FBURL = FBURL;
     }]);

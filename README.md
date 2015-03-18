@@ -114,7 +114,7 @@ Starts a server, runs the end-to-end tests and then stops the server. This will 
 close a few times.
 
 ```
-grunt liveDevMode
+grunt dev
 ```
 
 This is where you'll live most of the time. The command will open a browser and start watching your source files

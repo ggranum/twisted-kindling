@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  var module = angular.module('myApp.account', ['firebase.utils', 'simpleLogin', 'ngMaterial']);
+  var module = angular.module('myApp.account', ['simpleLogin', 'ngMaterial', 'firebase']);
   module.config([
     "$mdThemingProvider", function ($mdThemingProvider) {
       // Configure a dark theme with primary foreground yellow
@@ -10,10 +10,10 @@
         .dark();
     }]);
   module.controller('AccountCtrl', [
-    '$scope', 'simpleLogin', 'fbutil', 'user', '$location',
-    function ($scope, simpleLogin, fbutil, user, $location) {
+    '$scope', 'simpleLogin', '$firebaseObject', '$location',  'user', 'FBURL' ,
+    function ($scope, simpleLogin, $firebaseObject, $location, user, FBURL) {
       // create a 3-way binding with the user profile object in Firebase
-      var profile = fbutil.syncObject(['users', user.uid]);
+      var profile = $firebaseObject(new Firebase(FBURL + '/users/' + user.uid));
       profile.$bindTo($scope, 'profile');
 
       // expose logout function to scope
@@ -49,7 +49,7 @@
         simpleLogin.changeEmail(pass, oldEmail, newEmail)
           .then(function (user) {
             profile.$destroy();
-            profile = fbutil.syncObject(['users', user.uid]);
+            profile = $firebaseObject(new Firebase(FBURL + '/users/' + user.uid));
             profile.$bindTo($scope, 'profile');
             $scope.emailmsg = 'Email changed';
           }, function (err) {

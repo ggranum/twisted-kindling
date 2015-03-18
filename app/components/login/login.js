@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-angular.module('myApp.login', ['firebase.utils', 'simpleLogin'])
+angular.module('myApp.login', ['firebase', 'simpleLogin'])
   .config([
     '$provide', function ($provide) {
       // adapt ng-cloak to wait for auth before it does its magic
