@@ -1,12 +1,24 @@
 (function () {
   "use strict";
 
-angular.module('myApp.home', ['firebase', 'simpleLogin', 'myApp.config'])
-  .controller('HomeCtrl', [
-    '$scope', '$firebaseObject', 'user', 'FBURL', function ($scope, $firebaseObject, user, FBURL) {
-      $scope.motd = $firebaseObject(new Firebase( FBURL + '/motd'));
-      $scope.user = user;
-      $scope.FBURL = FBURL;
-    }]);
+  var module = angular.module('myApp.home', ['firebase', 'simpleLogin', 'myApp.config']);
+
+  var HomeController = function ($firebaseObject, simpleLogin, FBURL) {
+    var self = this;
+    self.simpleLogin = simpleLogin;
+    self.foo = 100;
+    self.motd = $firebaseObject(new Firebase(FBURL + '/motd'));
+    self.FBURL = FBURL;
+  };
+
+  HomeController.prototype.activate = function(){
+    var self = this;
+    self.user = self.simpleLogin.getUser();
+    return self.user;
+
+  };
+
+  module.controller('HomeController', ['$firebaseObject', 'simpleLogin', 'FBURL', HomeController]);
+
 
 }());

@@ -7,33 +7,32 @@ describe('account', function(){
     module('myApp.account');
   });
 
-  describe('AccountCtrl', function() {
-    var acctCtrl, $scope;
+  describe('AccountController', function() {
+    var account, $scope;
     beforeEach(function() {
       module(function($provide) {
         // comes from routes.js in the resolve: {} attribute
         $provide.value('user', {uid: 'test123'});
       });
       inject(function($controller) {
-        $scope = {};
-        acctCtrl = $controller('AccountCtrl', {$scope: $scope});
+        account = $controller('AccountController', {});
       });
     });
 
     it('should define logout method', function() {
-      expect($scope.logout).toBeA('function');
+      expect(account.logout).toBeA('function');
     });
 
     it('should define changePassword method', function() {
-      expect($scope.changePassword).toBeA('function');
+      expect(account.changePassword).toBeA('function');
     });
 
     it('should define changeEmail method', function() {
-      expect($scope.changeEmail).toBeA('function');
+      expect(account.changeEmail).toBeA('function');
     });
 
     it('should define clear method', function() {
-      expect($scope.clear).toBeA('function');
+      expect(account.clear).toBeA('function');
     });
   });
 });

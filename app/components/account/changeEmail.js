@@ -1,8 +1,8 @@
 (function () {
   "use strict";
 
-angular.module('changeEmail', ['firebase'])
-  .factory('changeEmail', ['FBURL', '$q', '$rootScope', function(FBURL, $q, $rootScope) {
+var ngModule = angular.module('changeEmail', ['firebase']);
+  ngModule.factory('changeEmail', ['FBURL', '$q', '$rootScope', function(FBURL, $q, $rootScope) {
     return function(password, oldEmail, newEmail, simpleLogin) {
       var ctx = { old: { email: oldEmail }, curr: { email: newEmail } };
 

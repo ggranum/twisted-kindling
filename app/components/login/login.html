@@ -1,24 +1,23 @@
-
 <h2>Login Page</h2>
 
 <form>
     <label>
         <span>email</span>
-        <input type="text" ng-model="email" />
+        <input type="text" ng-model="login.email" />
     </label>
     <label>
         <span>password</span>
-        <input type="password" ng-model="pass" />
+        <input type="password" ng-model="login.pass" />
     </label>
-    <label ng-cloak ng-show="createMode">
+    <label ng-cloak ng-show="login.createMode">
         <span>confirm pass</span>
-        <input type="password" ng-model="confirm" />
+        <input type="password" ng-model="login.confirm" />
     </label>
-    <button ng-click="login(email, pass)" ng-hide="createMode">Log In</button>
-    <button ng-click="createMode = true" ng-hide="createMode">Register</button>
-    <button ng-cloak ng-show="createMode" ng-click="createAccount()">Create Account</button>
-    <button ng-cloak ng-show="createMode" ng-click="createMode = false">Cancel</button>
+    <button ng-hide="login.createMode" ng-click="login.performLogin()">Log In</button>
+    <button ng-hide="login.createMode" ng-click="login.createMode = true" >Register</button>
+    <button ng-cloak ng-show="login.createMode" ng-click="login.createAccount()">Create Account</button>
+    <button ng-cloak ng-show="login.createMode" ng-click="login.createMode = false">Cancel</button>
 
-    <p ng-show="err" class="error">{{err}}</p>
+    <p ng-show="login.err" class="error">{{login.err}}</p>
 </form>
 

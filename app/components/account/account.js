@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  var module = angular.module('myApp.account', ['simpleLogin', 'ngMaterial', 'firebase']);
+  var module = angular.module('myApp.account', ['firebase', 'simpleLogin', 'ngMaterial', 'myApp.core']);
   module.config([
     "$mdThemingProvider", function ($mdThemingProvider) {
       // Configure a dark theme with primary foreground yellow
@@ -9,61 +9,78 @@
         .primaryPalette('yellow')
         .dark();
     }]);
-  module.controller('AccountCtrl', [
-    '$scope', 'simpleLogin', '$firebaseObject', '$location',  'user', 'FBURL' ,
-    function ($scope, simpleLogin, $firebaseObject, $location, user, FBURL) {
-      // create a 3-way binding with the user profile object in Firebase
-      var profile = $firebaseObject(new Firebase(FBURL + '/users/' + user.uid));
-      profile.$bindTo($scope, 'profile');
 
-      // expose logout function to scope
-      $scope.logout = function () {
+  var AccountController = function ($rootScope, $firebaseObject, $location, userFactory, simpleLogin) {
+    var self = this;
+    angular.extend(self, {
+      $rootScope: $rootScope,
+      simpleLogin: simpleLogin,
+      userFactory: userFactory,
+      profile: undefined,
+      err: undefined,
+      msg: undefined,
+      emailerr: undefined,
+      emailmsg: undefined,
+      logout: function () {
         simpleLogin.logout();
-        profile.$destroy();
+        self.profile.$destroy();
         $location.path('/login');
-      };
-
-      $scope.changePassword = function (pass, confirm, newPass) {
-        resetMessages();
+      },
+      changePassword: function (pass, confirm, newPass) {
+        self.clear();
         if (!pass || !confirm || !newPass) {
-          $scope.err = 'Please fill in all password fields';
+          self.err = 'Please fill in all password fields';
         }
         else if (newPass !== confirm) {
-          $scope.err = 'New pass and confirm do not match';
+          self.err = 'New pass and confirm do not match';
         }
         else {
           simpleLogin.changePassword(profile.email, pass, newPass)
             .then(function () {
-              $scope.msg = 'Password changed';
+              self.msg = 'Password changed';
             }, function (err) {
-              $scope.err = err;
+              self.err = err;
             });
         }
-      };
-
-      $scope.clear = resetMessages;
-
-      $scope.changeEmail = function (pass, newEmail) {
-        resetMessages();
-        var oldEmail = profile.email;
+      },
+      clear: function () {
+        self.err = undefined;
+        self.msg = undefined;
+        self.emailerr = undefined;
+        self.emailmsg = undefined;
+      },
+      changeEmail: function (pass, newEmail) {
+        self.clear();
+        var oldEmail = self.profile.email;
         simpleLogin.changeEmail(pass, oldEmail, newEmail)
           .then(function (user) {
-            profile.$destroy();
-            profile = $firebaseObject(new Firebase(FBURL + '/users/' + user.uid));
-            profile.$bindTo($scope, 'profile');
-            $scope.emailmsg = 'Email changed';
+            self.profile.$destroy();
+            self.profile = self.userFactory.current();
+            self.profile.$bindTo($rootScope, 'profile');
+            self.emailmsg = 'Email changed';
           }, function (err) {
-            $scope.emailerr = err;
+            self.emailerr = err;
           });
-      };
-
-      function resetMessages() {
-        $scope.err = null;
-        $scope.msg = null;
-        $scope.emailerr = null;
-        $scope.emailmsg = null;
       }
-    }
-  ]);
+    });
+  };
+
+  AccountController.prototype.canActivate = function () {
+    var self = this;
+    return self.simpleLogin.getUser().then(function (authUser) {
+      return authUser !== undefined;
+    });
+
+  };
+  AccountController.prototype.activate = function () {
+    var self = this;
+    var promise = self.userFactory.current();
+    promise.then(function (profile) {
+      self.profile = profile;
+      self.profile.$bindTo(self.$rootScope, 'profile');
+    });
+    return promise;
+  };
+  module.controller('AccountController', ['$rootScope', '$firebaseObject', '$location', 'userFactory', 'simpleLogin', AccountController]);
 
 }());

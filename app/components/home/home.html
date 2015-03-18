@@ -1,11 +1,11 @@
 <md-content layout="column" layout-align="center center">
-  <h3><b>{{motd.$value}}</b></h3>
+  <h3><b>{{home.motd.$value}}</b></h3>
   <md-content class="md-padding" layout="row" layout-sm="column" style="font-size:1.2em">
     <md-content class="md-padding">
       <form name="userForm">
         <md-input-container flex>
           <label>Set the message of the day</label>
-          <input ng-model="motd.$value" md-maxlength="100" ng-change="motd.$save()"/>
+          <input ng-model="home.motd.$value" md-maxlength="100" ng-change="home.motd.$save()"/>
         </md-input-container>
       </form>
     </md-content>

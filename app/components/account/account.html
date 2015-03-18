@@ -6,57 +6,57 @@
     <div layout="row" layout-sm="column" style="font-size:1.2em">
       <md-input-container>
         <label>Username</label>
-        <input ng-model="profile.name">
+        <input ng-model="account.profile.name">
       </md-input-container>
       <md-input-container>
         <label>Email</label>
-        <input ng-model="profile.email" type="email" ng-readonly="true">
+        <input ng-model="account.profile.email" type="email" ng-readonly="true">
       </md-input-container>
     </div>
     <div layout="row" layout-align="end end">
-      <md-button class="md-raised" ng-click="logout()">Log Out</md-button>
+      <md-button class="md-raised" ng-click="account.logout()">Log Out</md-button>
     </div>
   </md-content>
   <md-content class="md-padding" style="border:1px solid black">
     <h3>Change Password</h3>
     <md-input-container flex>
       <label>Old Password</label>
-      <input type="password" ng-model="oldpass" ng-keypress="clear()">
+      <input type="password" ng-model="account.oldpass" ng-keypress="account.clear()">
     </md-input-container>
     <div layout layout-sm="column">
       <md-input-container flex>
         <label>New Password</label>
-        <input type="password" ng-model="newpass" ng-keypress="clear()">
+        <input type="password" ng-model="account.newpass" ng-keypress="account.clear()">
       </md-input-container>
       <md-input-container flex>
         <label>Confirm New Password</label>
-        <input type="password" ng-model="confirm" ng-keypress="clear()">
+        <input type="password" ng-model="account.confirm" ng-keypress="account.clear()">
       </md-input-container>
     </div>
-    <p class="error" ng-show="err">{{err}}</p>
+    <p class="error" ng-show="account.err">{{err}}</p>
 
-    <p class="good" ng-show="msg">{{msg}}</p>
+    <p class="good" ng-show="account.msg">{{msg}}</p>
 
     <div layout="row" layout-align="end end">
-      <md-button class="md-raised" ng-click="changePassword(oldpass, newpass, confirm)">change password</md-button>
+      <md-button class="md-raised" ng-click="account.changePassword(account.oldpass, account.newpass, account.confirm)">change password</md-button>
     </div>
   </md-content>
   <md-content class="md-padding" style="border:1px solid black">
     <h3>Change Email</h3>
     <md-input-container flex>
       <label>New Email</label>
-      <input type="email" ng-model="newEmail" ng-keypress="clear()">
+      <input type="email" ng-model="account.newEmail" ng-keypress="account.clear()">
     </md-input-container>
     <md-input-container flex>
       <label>Password</label>
-      <input type="password" ng-model="pass">
+      <input type="password" ng-model="account.pass">
     </md-input-container>
-    <p class="error" ng-show="emailerr">{{emailerr}}</p>
+    <p class="error" ng-show="account.emailerr">{{account.emailerr}}</p>
 
-    <p class="good" ng-show="emailmsg">{{emailmsg}}</p>
+    <p class="good" ng-show="account.emailmsg">{{account.emailmsg}}</p>
 
     <div layout="row" layout-align="end end">
-      <md-button class="md-raised" ng-click="changeEmail(pass, newEmail)">update email</md-button>
+      <md-button class="md-raised" ng-click="account.changeEmail(account.pass, account.newEmail)">update email</md-button>
     </div>
   </md-content>
 </div>

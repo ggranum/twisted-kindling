@@ -15,7 +15,7 @@
     <inspection_tool class="HtmlUnknownAttribute" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="myValues">
         <value>
-          <list size="40">
+          <list size="43">
             <item index="0" class="java.lang.String" itemvalue="value" />
             <item index="1" class="java.lang.String" itemvalue="vertical" />
             <item index="2" class="java.lang.String" itemvalue="layout" />
@@ -56,10 +56,20 @@
             <item index="37" class="java.lang.String" itemvalue="layout-sm" />
             <item index="38" class="java.lang.String" itemvalue="md-svg-src" />
             <item index="39" class="java.lang.String" itemvalue="columns" />
+            <item index="40" class="java.lang.String" itemvalue="router-view-port" />
+            <item index="41" class="java.lang.String" itemvalue="layout-align" />
+            <item index="42" class="java.lang.String" itemvalue="href" />
           </list>
         </value>
       </option>
       <option name="myCustomValuesEnabled" value="true" />
+    </inspection_tool>
+    <inspection_tool class="HtmlUnknownBooleanAttribute" enabled="true" level="WARNING" enabled_by_default="true">
+      <myValues>
+        <item value="ng-cloak" />
+        <item value="ng-show-auth" />
+        <item value="ng-hide-auth" />
+      </myValues>
     </inspection_tool>
     <inspection_tool class="HtmlUnknownTag" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="myValues">

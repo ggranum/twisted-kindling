@@ -1,13 +1,19 @@
 (function () {
   "use strict";
-  var module = angular.module('myApp.header', ['firebase', 'simpleLogin']);
+  var module = angular.module('myApp.header', ['firebase', 'simpleLogin', 'myApp.core']);
 
-  module.controller('HeaderMenuController', [
-    '$scope', 'userFactory', function ($scope, userFactory) {
-      userFactory.current().then(function (profile) {
-        if (profile) {
-          profile.$bindTo($scope, 'profile');
+  module.controller('HeaderController', [
+    '$mdSidenav', '$log', 'userFactory', function ($mdSidenav, $log, userFactory) {
+      var self = this;
+      angular.extend(self, {
+        toggleRight: function () {
+          $mdSidenav('right').toggle().then(function () {
+            $log.debug("toggle RIGHT is done");
+          });
         }
+      });
+      userFactory.current().then(function (profile) {
+        self.profile = profile;
       });
     }]);
 
@@ -16,8 +22,8 @@
       return {
         restrict: 'E',
         templateUrl: '/components/header/header.html',
-        controller: 'HeaderMenuController',
-        transclude: false
+        controller: 'HeaderController',
+        controllerAs: 'header'
       };
     }]);
 

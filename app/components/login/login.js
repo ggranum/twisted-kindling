@@ -1,8 +1,8 @@
 (function () {
   "use strict";
 
-angular.module('myApp.login', ['firebase', 'simpleLogin'])
-  .config([
+  var ngModule = angular.module('myApp.login', ['firebase', 'simpleLogin']);
+  ngModule.config([
     '$provide', function ($provide) {
       // adapt ng-cloak to wait for auth before it does its magic
       $provide.decorator('ngCloakDirective', [
@@ -20,66 +20,63 @@ angular.module('myApp.login', ['firebase', 'simpleLogin'])
           // return the modified directive
           return $delegate;
         }]);
-    }])
-/**
- * Wraps ng-cloak so that, instead of simply waiting for Angular to compile, it waits until
- * simpleLogin resolves with the remote Firebase services.
- *
- * <code>
- *    <div ng-cloak>Authentication has resolved.</div>
- * </code>
- */
-  .controller('LoginCtrl', [
-    '$scope', 'simpleLogin', '$location', function ($scope, simpleLogin, $location) {
-      $scope.email = null;
-      $scope.pass = null;
-      $scope.confirm = null;
-      $scope.createMode = false;
+    }]);
 
-      $scope.login = function (email, pass) {
-        $scope.err = null;
-        simpleLogin.login(email, pass)
-          .then(function (/* user */) {
-            $location.path('/account');
-          }, function (err) {
-            $scope.err = errMessage(err);
-          });
-      };
+  ngModule.controller('LoginController', [
+    'simpleLogin', '$location', function (simpleLogin, $location) {
+      var self = this;
 
-      $scope.createAccount = function () {
-        $scope.err = null;
-        if (assertValidAccountProps()) {
-          simpleLogin.createAccount($scope.email, $scope.pass)
+      angular.extend(self, {
+        email: null,
+        pass: null,
+        confirm: null,
+        createMode: false,
+        performLogin: function () {
+
+          self.err = null;
+          simpleLogin.login(self.email, self.pass)
             .then(function (/* user */) {
               $location.path('/account');
             }, function (err) {
-              $scope.err = errMessage(err);
+              self.err = self.errMessage(err);
             });
+        },
+        createAccount: function () {
+          self.err = null;
+          if (self.assertValidAccountProps()) {
+            simpleLogin.createAccount(self.email, self.pass)
+              .then(function (/* user */) {
+                $location.path('/account');
+              }, function (err) {
+                self.err = self.errMessage(err);
+              });
+          }
+        },
+        assertValidAccountProps: function () {
+          if (!self.email) {
+            self.err = 'Please enter an email address';
+          }
+          else if (!self.pass || !self.confirm) {
+            self.err = 'Please enter a password';
+          }
+          else if (self.createMode && self.pass !== self.confirm) {
+            self.err = 'Passwords do not match';
+          }
+          return !self.err;
+        },
+        errMessage: function (err) {
+          return angular.isObject(err) && err.code ? err.code : err + '';
         }
-      };
+      });
 
-      function assertValidAccountProps() {
-        if (!$scope.email) {
-          $scope.err = 'Please enter an email address';
-        }
-        else if (!$scope.pass || !$scope.confirm) {
-          $scope.err = 'Please enter a password';
-        }
-        else if ($scope.createMode && $scope.pass !== $scope.confirm) {
-          $scope.err = 'Passwords do not match';
-        }
-        return !$scope.err;
-      }
 
-      function errMessage(err) {
-        return angular.isObject(err) && err.code ? err.code : err + '';
-      }
-    }])
 
-/**
- * A directive that shows elements only when user is logged in.
- */
-  .directive('ngShowAuth', [
+    }]);
+
+  /**
+   * A directive that shows elements only when user is logged in.
+   */
+  ngModule.directive('ngShowAuth', [
     'simpleLogin', '$timeout', function (simpleLogin, $timeout) {
       var isLoggedIn;
       simpleLogin.watch(function (user) {
@@ -103,12 +100,12 @@ angular.module('myApp.login', ['firebase', 'simpleLogin'])
           simpleLogin.watch(update, scope);
         }
       };
-    }])
+    }]);
 
-/**
- * A directive that shows elements only when user is logged out.
- */
-  .directive('ngHideAuth', [
+  /**
+   * A directive that shows elements only when user is logged out.
+   */
+  ngModule.directive('ngHideAuth', [
     'simpleLogin', '$timeout', function (simpleLogin, $timeout) {
       var isLoggedIn;
       simpleLogin.watch(function (user) {

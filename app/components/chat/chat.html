@@ -1,20 +1,20 @@
 <h2>Chat</h2>
 
 <form>
-  <input placeholder="Message..." ng-model="newMessage">
-  <button type="submit" ng-click="addMessage(newMessage);newMessage = null;">send</button>
+  <input placeholder="Message..." ng-model="chat.newMessage">
+  <button type="submit" ng-click="chat.addMessage(chat.newMessage);chat.newMessage = null;">send</button>
 </form>
 
 <md-content class="myApp-chat">
   <md-list>
-    <md-item ng-repeat="message in messages | orderBy : 'when' : true">
+    <md-item ng-repeat="message in chat.messages | orderBy : 'when' : true">
       <md-item-content>
         <div class="md-tile-left">
           <img ng-src="{{message.avatar}}" class="face" alt="{{message.who}}">
         </div>
         <div class="md-tile-content">
           <h3>{{message.text}}</h3>
-        <div class="username">{{message.who}} -- {{toIsoDate(message.when)}}</div>
+        <div class="username">{{message.who}} -- {{chat.toIsoDate(message.when)}}</div>
         </div>
       </md-item-content>
     </md-item>
