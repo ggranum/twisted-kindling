@@ -1,6 +1,6 @@
 {
   "firebase": "twisted-kindling",
-  "public": "dist",
+  "public": "build/dist",
   "ignore": [
     "firebase.json",
     "**/.*",

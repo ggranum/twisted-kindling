@@ -2,5 +2,7 @@
 <project version="4">
   <component name="JavaScriptLibraryMappings">
     <file url="file://$PROJECT_DIR$" libraries="{angularfire-component-seed node_modules}" />
+    <file url="file://$PROJECT_DIR$/Gruntfile.js" libraries="{Node.js Globals, Node.js v0.10.34 Core Modules}" />
+    <file url="file://$PROJECT_DIR$/gulpfile.js" libraries="{Node.js Globals, Node.js v0.10.34 Core Modules}" />
   </component>
 </project>

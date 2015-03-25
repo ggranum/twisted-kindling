@@ -4,14 +4,16 @@ This seed project extends the (excellent) [angularfire-seed][AngularFire-Seed] p
 
 What's different? Well, start by checking out the [demo][demo].
 
-Behind the scenes, we've got much more:
- - Swap out the NPM build targets for Gulp, including minification, SASS, linting, Live-Reload, and more.
- - Component Oriented: the file system is aligned with how you develop your app, not Angular nouns. Currently this seed doesn't use nested directories
- under the primary 'components' directory, but it should be possible to augment the build system to handle it fairly easily. Consider it a todo item.
- - Material Design. { Soon to be deprecated? The MD team has made a number of design choices that seem... overly complicated. We'll see how 1.0 turns out. }
- - More fully functional authentication and user profile model.
+
 
 # Features
+
+ - Angular 1.4 + New Router
+ - Swap out the NPM build targets for Gulp, including SASS, minification, linting, Live-Reload and more.
+ - Component Oriented: the file system is aligned with how you develop your app, not Angular nouns. Currently this seed doesn't use nested directories
+ under the primary 'components' directory, but it should be possible to augment the build system to handle it fairly easily. Consider it a todo item.
+ - Angular Material Design.
+ - More fully functional authentication and user profile model.
 
 ## Component Oriented build and file system
 
@@ -27,12 +29,10 @@ group the file structure by component:
           app.spec.js                          --> Unit tests for 'base'
           config.js                            --> A configuration module
           config.spec.js                       -->
-          firebase.utils.js                    --> Some shared firebase factories
           routes.js                            --> Route configuration for the entire application.
           _palette.scss                        --> Your configure the color palette for your application's CSS.
           _variables.scss                      --> Configure your SCSS variables, such as proportional widths, heights etc.
         _twistedKindling/                      --> Supporting code that you aren't expected to need to edit. (this may become a separate bower project)
-          experiments/                         --> You can ignore this folder for now. Discussion to come.
           _twisted_kindling.scss               --> Import this file in your primary scss file (see app.scss).
           _materialDesignHacks.scss/           --> Workarounds for issues found in the material design styles. See comments in the file.
           _tk-components.scss                  -->
@@ -100,27 +100,25 @@ gulp
 
 The default build - no task, no targets passed on command line. This performs all build and package tasks.
 Which is to say, it is a "full build".
-Your entire site will be built into the 'dist' directory (short for 'distribution'), ready to be deployed
+Your entire site will be built into the 'build/dist' directory (short for 'distribution'), ready to be deployed
 via firebase.json. The 'dist' directory is also compressed into a zip archive which is by default stored
 in the root project directory and is named 'myApp.zip'.
 
 ```
-gulp e2e
+gulp test.e2e
 ```
 
-Starts a server, runs the end-to-end tests and then stops the server. This will cause a browser to open and
+Starts a server, runs the end-to-end tests using Protractor and then stops the server. This may cause a browser to open and
 close a few times.
 
 ```
 gulp sync
 ```
 
-This is where you'll live most of the time. The command will open a browser and start watching your source files
-(but NOT your bower_components directory. Changes to your source SCSS files will trigger a SASS compile, which
-will in turn cause the livereload plugin to trigger a browser refresh. Changes to JS files will trigger JSHint
-and Karma to re-run, and also will trigger a browser refresh. Ditto modifications to HTML files.
-
-
+This is where you'll live most of the time. The command will open a browser and start watching your source files. 
+Changes to your source SCSS files will trigger a SASS compile, which will in turn cause the livereload plugin to trigger a browser refresh. 
+Changes to JS files will trigger JSHint and Karma to re-run, and also will trigger a browser refresh. Ditto modifications to HTML files.
+Changes to your bower_components directory are NOT monitored, so be sure to stop and restart after adding new dependencies.
 
 
 ## Future maintenance of this branch
@@ -130,17 +128,16 @@ fork will see much development beyond these few initial changes I have made.
 
 
 ## Thanks Angular and Firebase Teams!
-The highly modified version of the original readme.md content follows.
 
 
-# angularfire-component-seed — the component-oriented seed for Angular+Firebase apps
+# twisted-kindling — the component-oriented seed for Angular+Firebase apps
 
 This derivative of [angular-seed](https://github.com/angular/angular-seed) is an application 
 skeleton for a typical [AngularFire](http://angularfire.com/) web app, modified to put focus on
 component-based development. You can use it to quickly bootstrap your Angular + Firebase projects.
 
 The seed is preconfigured to install the Angular framework, Firebase, AngularFire, and a bundle of
-development and testing tools. The application is built using gulp, which is a significant departure
+development and testing tools. The application is built using Gulp, which is a significant departure
 from the parent projects.
 
 The seed app doesn't do much, but does demonstrate the basics of Angular + Firebase development,
@@ -148,12 +145,11 @@ including:
  * binding synchronized objects
  * binding synchronized arrays
  * authentication
- * route security
- * basic account management
+ * the new angular router, including route security
+ * basic account management using Firebase
 
 
-
-## How to use angularfire-seed
+## How to use twisted-kindling
 
 Other than one additional configuration step (specifying your Firebase URL), this setup is nearly
 identical to angular-seed.
@@ -166,13 +162,13 @@ You need git to clone the angularfire-seed repository. You can get it from
 We also use a number of node.js tools to initialize and test angularfire-seed. You must have node.js and
 its package manager (npm) installed.  You can get them from [http://nodejs.org/](http://nodejs.org/).
 
-### Clone angularfire-component-seed
+### Clone twisted-kindling
 
-Clone the angularfire-component-seed repository using [git][git]:
+Clone the twisted-kindling repository using [git][git]:
 
 ```
-git clone https://github.com/ggranum/angularfire-seed.git
-cd angularfire-seed
+git clone https://github.com/ggranum/twisted-kindling.git
+cd twisted-kindling
 ```
 
 ### Install Dependencies
@@ -188,7 +184,6 @@ Simply run the following commands from your command line:
 ```
 npm install
 bower install
-npm run update-webdriver
 ```
 
 You should find that you have two new folders in your project.
@@ -197,8 +192,8 @@ You should find that you have two new folders in your project.
 * `app/bower_components` - contains the angular framework files
 
 *Note that the `bower_components` folder would normally be installed in the root folder but
-angularfire-seed changes this location through the `.bowerrc` file.  Putting it in the app folder makes
-it easier to serve the files by a webserver.*
+twisted-kindling changes this location through the `.bowerrc` file.  Putting it in the app folder makes
+IntelliJ happier, as paths can all be resolved, even during development.*
 
 ### Configure the Application
 
@@ -215,15 +210,12 @@ this server is:
 gulp sync
 ```
 
-Which will open a browser to `http://localhost:8000/`, loading your index.html file. Gulp-watch will monitor your html, css and js
+Then open a browser to `http://localhost:8000/`, to load your index.html file. Gulp-watch will monitor your html, css and js
 files for changes, refreshing your the browser and running jshint and karma when modifications are made.
-
-## Directory Layout
- See introduction.
 
 ## Testing
 
-There are two kinds of tests in the angularfire-seed application: Unit tests and End to End tests.
+There are two kinds of tests in the twisted-kindling application: Unit tests and End to End tests.
 
 ### Running Unit Tests
 
@@ -252,27 +244,37 @@ check that a particular version of the code is operating as expected. The Gulp b
 predefined task to do this:
 
 ```
-gulp karma.continuous
+gulp test.unit/ci
 ```
 
-As you can probably guess from the name, this is a task target that can also used to run our continuous
-build tests.
+As you can probably guess from the name, this is a task target that can also used to run tests on our continuous
+integration server.
 
 ### End to end testing
 
-The angularfire-seed app comes with end-to-end tests, again written in [Jasmine][jasmine]. These tests
+The twisted-kindling app comes with end-to-end tests, again written in [Jasmine][jasmine]. These tests
 are run with the [Protractor][protractor] End-to-End test runner.  It uses native events and has
 special features for Angular applications.
 
-* the configuration is found at `test/protractor-conf.js`
+* the configuration is found at `test/protractor.conf.js`
 * the end-to-end tests are found in `test/e2e/`
 
 Protractor simulates interaction with our web app and verifies that the application responds
 correctly. Therefore, our web server needs to be serving up the application, so that Protractor
-can interact with it - which our Gulp task will handle for us.
+can interact with it - which a shell script will handle for us, at least if we're on a real OS ;~).
 
-Since Protractor is built upon WebDriver we need to install this.  The angularfire-seed
-project comes with a predefined script to do this (which we ran as part of installing dependencies!):
+
+```bash
+gulp test.e2e
+```
+
+This will start a server by executing the `gulp server.prod` task, and then will execute Protractor scenarios by calling `npm run protractor`.
+Technically, the test.e2e tasks calls a shell script which does the above. So if you are on windows, see the next section.
+  
+#### E2E on Windows
+If you're on Windows you can perform these steps manually, but do watch out for servers that don't shut down properly.
+
+First, update the webdriver by running the node script:
 
 ```
 npm run update-webdriver
@@ -280,22 +282,23 @@ npm run update-webdriver
 
 This downloads and install the latest version of the WebDriver tool.
 
-Once you have updated WebDriver, you can start a server and run the end-to-end tests in one step
-using the supplied gulp script:
+Once you have updated WebDriver, you can start a server using the supplied gulp task:
 
 ```
-gulp e2e
+gulp server.prod
 ```
 
-This script will start a server and execute the end-to-end tests against the application being hosted on the
-development server.
+Then run execute the protractor test by executing the node script:
+ ```
+ npm run protractor
+ ```
+
+
+Enjoy!
 
 
 ## Updating Dependencies
 
-Previously we recommended that you merge in changes to angularfire-seed into your own fork of the project.
-Now that the angular framework library code and tools are acquired through package managers (npm and
-bower) you can use these tools instead to update the dependencies.
 
 You can update the tool dependencies by running:
 
@@ -305,7 +308,7 @@ npm update
 
 This will find the latest versions that match the version ranges specified in the `package.json` file.
 
-You can update the Angular, Firebase, and AngularFire dependencies by running:
+You can update the Angular, Firebase, AngularFire and myriad other dependencies by running:
 
 ```
 bower update
@@ -326,7 +329,7 @@ somewhere they can be accessed by browsers.
 ## Continuous Integration
 
 ### Travis CI
-
+ (Untested for twisted-kindling)
 [Travis CI][travis] is a continuous integration service, which can monitor GitHub for new commits
 to your repository and execute scripts such as building the app or running tests. The angularfire-seed
 project contains a Travis configuration file, `.travis.yml`, which will cause Travis to run your
@@ -336,7 +339,7 @@ You will need to enable the integration between Travis and GitHub. See the Travi
 instruction on how to do this.
 
 ### CloudBees
-
+(Untested for twisted-kindling)
 CloudBees have provided a CI/deployment setup:
 
 <a href="https://grandcentral.cloudbees.com/?CB_clickstart=https://raw.github.com/CloudBees-community/angular-js-clickstart/master/clickstart.json">

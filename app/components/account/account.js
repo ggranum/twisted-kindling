@@ -10,9 +10,10 @@
         .dark();
     }]);
 
-  var AccountController = function ($rootScope, $firebaseObject, $location, userFactory, simpleLogin) {
+  var AccountController = function ($rootScope, $firebaseObject, $location, $q, userFactory, simpleLogin) {
     var self = this;
     angular.extend(self, {
+      $q: $q,
       $rootScope: $rootScope,
       simpleLogin: simpleLogin,
       userFactory: userFactory,
@@ -65,10 +66,16 @@
     });
   };
 
+  /**
+   * Verify that there is a user logged in before allowing the navigation.
+   * Note that the URL is NOT reverted if the promise returned by canActivate
+   * is rejected.
+   * @returns {Promise}
+   */
   AccountController.prototype.canActivate = function () {
     var self = this;
     return self.simpleLogin.getUser().then(function (authUser) {
-      return authUser !== undefined;
+      return authUser == null ? self.$q.reject("User is required.") : true;
     });
 
   };
@@ -81,6 +88,6 @@
     });
     return promise;
   };
-  module.controller('AccountController', ['$rootScope', '$firebaseObject', '$location', 'userFactory', 'simpleLogin', AccountController]);
+  module.controller('AccountController', ['$rootScope', '$firebaseObject', '$location', '$q', 'userFactory', 'simpleLogin', AccountController]);
 
 }());

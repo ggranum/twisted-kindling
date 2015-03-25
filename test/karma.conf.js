@@ -1,6 +1,6 @@
 module.exports = function(config){
   config.set({
-    logLevel: 'LOG_DEBUG',
+    logLevel: 'INFO',
     basePath : '../',
 
     files : [
