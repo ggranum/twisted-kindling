@@ -34,7 +34,7 @@
   module.directive('myAppMainMenu', [function () {
       return {
         restrict: 'E',
-        templateUrl: '/components/mainMenu/mainMenu.html',
+        templateUrl: '/components/mainMenu/mainMenu.tpl.html',
         controller: 'MainMenuController',
         transclude: false,
         scope: {

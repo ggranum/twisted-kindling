@@ -490,23 +490,3 @@ $currentTheme: 'default';
   $warn-700: hexToRgb(map-get($warnPaletteHueMap, 700)) !global;
   @return null;
 }
-
-@mixin md-theme-mixin() {
-  $theme: map-get($tk-defined-themes, $currentTheme);
-
-  $X: setColors($theme);
-  &.md-#{$currentTheme}-theme {
-    @content;
-  }
-}
-
-@mixin md-theme-hues-mixin() {
-  $theme: map-get($tk-defined-themes, $currentTheme);
-
-  @each $hueName in $md-palette-HUE_NAMES {
-    $X: setColors($theme, $hueName);
-    &.md-#{$currentTheme}-theme#{if($hueName == 'default', '', '.md-#{$hueName}')} {
-      @content;
-    }
-  }
-}

@@ -5,10 +5,10 @@ This seed project extends the (excellent) [angularfire-seed][AngularFire-Seed] p
 What's different? Well, start by checking out the [demo][demo].
 
 Behind the scenes, we've got much more:
- - Swap out the NPM build targets for Grunt, including minification, SASS, linting, Live-Reload, and more.
+ - Swap out the NPM build targets for Gulp, including minification, SASS, linting, Live-Reload, and more.
  - Component Oriented: the file system is aligned with how you develop your app, not Angular nouns. Currently this seed doesn't use nested directories
  under the primary 'components' directory, but it should be possible to augment the build system to handle it fairly easily. Consider it a todo item.
- - Material Design.
+ - Material Design. { Soon to be deprecated? The MD team has made a number of design choices that seem... overly complicated. We'll see how 1.0 turns out. }
  - More fully functional authentication and user profile model.
 
 # Features
@@ -84,20 +84,18 @@ required to keep track of which code is and is not related to the widget under e
 typically shrink on average, which also tends to lend to a reduced mental overhead.
 
 ## Other changes to original seed project:
-I've removed most of the npm hooks in favor of the Grunt build tasks.
+I've removed most of the npm hooks in favor of the Gulp build tasks.
 
 IntelliJ project files have been committed, because this fork is mostly for me, and I like it that way :~)
 
-Grunt. This seed project expands on (and replaces) the basic npm driven run targets, adding livereload,
+Gulp. This seed project expands on (and replaces) the basic npm driven run targets, adding livereload,
 minification (html, JS and CSS), linting, SASS compilation, image optimization... "the works".
 
-At the top of Gruntfile.js you will find a batch of configuration options with some (though not nearly enough)
-comments to help identify what each option is useful for.
 
-At the bottom of the file you will find the build targets, also commented. The three main targets are:
+At the bottom of the file you will find the build targets. The three main targets are:
 
 ```
-grunt
+gulp
 ```
 
 The default build - no task, no targets passed on command line. This performs all build and package tasks.
@@ -107,14 +105,14 @@ via firebase.json. The 'dist' directory is also compressed into a zip archive wh
 in the root project directory and is named 'myApp.zip'.
 
 ```
-grunt e2e
+gulp e2e
 ```
 
 Starts a server, runs the end-to-end tests and then stops the server. This will cause a browser to open and
 close a few times.
 
 ```
-grunt dev
+gulp sync
 ```
 
 This is where you'll live most of the time. The command will open a browser and start watching your source files
@@ -142,7 +140,7 @@ skeleton for a typical [AngularFire](http://angularfire.com/) web app, modified 
 component-based development. You can use it to quickly bootstrap your Angular + Firebase projects.
 
 The seed is preconfigured to install the Angular framework, Firebase, AngularFire, and a bundle of
-development and testing tools. The application is built using Grunt, which is a significant departure
+development and testing tools. The application is built using gulp, which is a significant departure
 from the parent projects.
 
 The seed app doesn't do much, but does demonstrate the basics of Angular + Firebase development,
@@ -214,10 +212,10 @@ We have preconfigured the project with a simple development web server.  The sim
 this server is:
 
 ```
-grunt liveDevMode
+gulp sync
 ```
 
-Which will open a browser to `http://localhost:8000/`, loading your index.html file. Grunt Watch will monitor your html, css and js
+Which will open a browser to `http://localhost:8000/`, loading your index.html file. Gulp-watch will monitor your html, css and js
 files for changes, refreshing your the browser and running jshint and karma when modifications are made.
 
 ## Directory Layout
@@ -236,25 +234,25 @@ configuration file to run them.
 * the configuration is found at `test/karma.conf.js`
 * the unit tests are found beside the components that they test, such as `components/account/account.spec.js`
 
-The easiest way to run unit tests is to enter live development mode with grunt, which will run
+The easiest way to run unit tests is to enter live development mode with gulp, which will run
 Karma tests when source or test javascript files are modified. Live development mode also runs
 jshint and refreshes your browser on changes to monitored source files.
 
 ```
-grunt liveDevMode
+gulp sync
 ```
 
-This Grunt task will start the Karma test runner to execute the unit tests. Moreover, Karma (via Grunt Watch)
+This Gulp task will start the Karma test runner to execute the unit tests. Moreover, Karma (via Gulp Watch)
 will sit and watch the source and test files for changes and then re-run the tests whenever any of them change.
 This is the recommended strategy; if your unit tests are being run every time you save a file then
 you receive instant feedback on any changes that break the expected code functionality.
 
 You can also ask Karma to do a single run of the tests and then exit. This is useful if you want to
-check that a particular version of the code is operating as expected. The Grunt build contains a
+check that a particular version of the code is operating as expected. The Gulp build contains a
 predefined task to do this:
 
 ```
-grunt karma:continuous
+gulp karma.continuous
 ```
 
 As you can probably guess from the name, this is a task target that can also used to run our continuous
@@ -271,7 +269,7 @@ special features for Angular applications.
 
 Protractor simulates interaction with our web app and verifies that the application responds
 correctly. Therefore, our web server needs to be serving up the application, so that Protractor
-can interact with it - which our Grunt task will handle for us.
+can interact with it - which our Gulp task will handle for us.
 
 Since Protractor is built upon WebDriver we need to install this.  The angularfire-seed
 project comes with a predefined script to do this (which we ran as part of installing dependencies!):
@@ -283,10 +281,10 @@ npm run update-webdriver
 This downloads and install the latest version of the WebDriver tool.
 
 Once you have updated WebDriver, you can start a server and run the end-to-end tests in one step
-using the supplied grunt script:
+using the supplied gulp script:
 
 ```
-grunt e2e
+gulp e2e
 ```
 
 This script will start a server and execute the end-to-end tests against the application being hosted on the
@@ -315,56 +313,11 @@ bower update
 
 This will find the latest versions that match the version ranges specified in the `bower.json` file.
 
-
-## Loading AngularFire Asynchronously
-
-The angularfire-seed project supports loading the framework and application scripts asynchronously.  The
-special `index-async.html` is designed to support this style of loading.  For it to work you must
-inject a piece of Angular JavaScript into the HTML page.  The project has a predefined script to help
-do this.
-
-```
-npm run update-index-async
-```
-
-This will copy the contents of the `angular-loader.js` library file into the `index-async.html` page.
-You can run this every time you update the version of Angular that you are using.
-
-
-## Serving the Application Files
-
-While Angular is client-side-only technology and it's possible to create Angular webapps that
-don't require a backend server at all, we recommend serving the project files using a local
-webserver during development to avoid issues with security restrictions (sandbox) in browsers. The
-sandbox implementation varies between browsers, but quite often prevents things like cookies, xhr,
-etc to function properly when an html page is opened via `file://` scheme instead of `http://`.
-
-
-### Running the App during Development
-
-The angularfire-seed project comes preconfigured with a local development webserver.  It is a node.js
-tool called [http-server][http-server].  You can start this webserver with `npm start` but you may choose to
-install the tool globally:
-
-```
-sudo npm install -g http-server
-```
-
-Then you can start your own development web server to serve static files from a folder by
-running:
-
-```
-http-server
-```
-
-Alternatively, you can choose to configure your own webserver, such as apache or nginx. Just
-configure your server to serve the files under the `app/` directory.
-
-
 ### Running the App in Production
 
 This really depends on how complex is your app and the overall infrastructure of your system, but
-the general rule is that all you need in production are all the files under the `app/` directory.
+the general rule is that all you need in production are all the files under the `/build/dist/` directory. 
+After calling 'gulp build', of course.
 Everything else should be omitted.
 
 Angular/Firebase apps are really just a bunch of static html, css and js files that just need to be hosted

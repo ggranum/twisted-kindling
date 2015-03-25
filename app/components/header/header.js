@@ -21,7 +21,7 @@
     function () {
       return {
         restrict: 'E',
-        templateUrl: '/components/header/header.html',
+        templateUrl: '/components/header/header.tpl.html',
         controller: 'HeaderController',
         controllerAs: 'header'
       };

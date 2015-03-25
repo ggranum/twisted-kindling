@@ -480,54 +480,60 @@ module.exports = function (grunt) {
    * - Watch plugin triggers jshint and karma test run when source JS files change.
    */
   grunt.registerTask('dev', function (target) {
-    grunt.task.run([
-      'clean:staging',
-      'sass:dev',
-      'autoprefixer',
-      'configureProxies:liveDevMode',
-      'karma:liveDevMode:start',
-      'connect:liveDevMode',
-      'watch'
-    ]);
+    grunt.log("Deprecated, use Gulp");
+    //grunt.task.run([
+    //  'clean:staging',
+    //  'sass:dev',
+    //  'autoprefixer',
+    //  'configureProxies:liveDevMode',
+    //  'karma:liveDevMode:start',
+    //  'connect:liveDevMode',
+    //  'watch'
+    //]);
   });
 
   grunt.registerTask('e2e', function (target) {
-    grunt.task.run([
-      'build',
-      'connect:dist',
-      'protractor'
-    ]);
+    grunt.log("Deprecated, use Gulp");
+    //grunt.task.run([
+    //  'build',
+    //  'connect:dist',
+    //  'protractor'
+    //]);
   });
 
   /**
    * Performs a clean and a full build (minimize, inject, concat, optimize, etc), but runs no tests.
    */
-  grunt.registerTask('build', [
-    'clean:staging',
-    'clean:dist',
-    'useminPrepare',
-    'sass:dev',
-    'concurrent:dist',
-    'autoprefixer',
-    'copy:dist',
-    'concat',
-    'cssmin',
-    'uglify',
-    'rev',
-    'usemin',
-    'htmlmin'
-  ]);
+  grunt.registerTask('build', function(){
+
+    grunt.log("Deprecated, use Gulp");
+  //  var x = [
+  //  'clean:staging',
+  //  'clean:dist',
+  //  'useminPrepare',
+  //  'sass:dev',
+  //  'concurrent:dist',
+  //  'autoprefixer',
+  //  'copy:dist',
+  //  'concat',
+  //  'cssmin',
+  //  'uglify',
+  //  'rev',
+  //  'usemin',
+  //  'htmlmin'
+  //];
+  });
 
   /**
    * Run JSHint, karma tests, do a full build and then package the app into a zip file.
    */
   grunt.registerTask('default', function (target) {
-
-    grunt.task.run([
-      'jshint',
-      'karma:continuous',
-      'build',
-      'compress:main'
-    ]);
+    grunt.log("Deprecated, use Gulp");
+    //grunt.task.run([
+    //  'jshint',
+    //  'karma:continuous',
+    //  'build',
+    //  'compress:main'
+    //]);
   });
 };

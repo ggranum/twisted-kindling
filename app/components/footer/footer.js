@@ -7,7 +7,7 @@
         $scope.showGridBottomSheet = function ($event) {
           $scope.alert = '';
           $mdBottomSheet.show({
-            templateUrl: '/components/footer/footer.html',
+            templateUrl: '/components/footer/footer.tpl.html',
             controller: 'GridBottomSheetCtrl',
             targetEvent: $event
           }).then(function (clickedItem) {

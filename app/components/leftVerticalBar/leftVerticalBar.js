@@ -7,7 +7,7 @@
 
       return {
         restrict: 'E',
-        templateUrl: '/components/leftVerticalBar/leftVerticalBar.html',
+        templateUrl: '/components/leftVerticalBar/leftVerticalBar.tpl.html',
         transclude: false,
         link: linkFn,
         scope: {

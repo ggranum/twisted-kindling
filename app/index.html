@@ -12,16 +12,9 @@
 
   <link rel="shortcut icon" href="/favicon.ico">
 
-  <!-- build:css static/bower.css -->
+  <!-- build:css1 static/bower.css -->
   <link rel="stylesheet" href="bower_components/normalize/normalize.css"/>
   <link rel="stylesheet" href="bower_components/angular-material/angular-material.css"/>
-  <!-- endbuild -->
-
-  <!-- build:css(staging) static/app.css -->
-  <link rel="stylesheet" href="components/_app/app.css"/>
-  <!-- endbuild -->
-
-  <!-- build:css static/md-icons/material-svg-icons.css -->
   <link rel="stylesheet" href="bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-action.css">
   <link rel="stylesheet" href="bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-content.css">
   <link rel="stylesheet" href="bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-communication.css">
@@ -30,9 +23,10 @@
   <link rel="stylesheet" href="bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-social.css">
   <!-- endbuild -->
 
-  <style>
+  <!-- build:css2(build/staging) static/app.css -->
+  <link rel="stylesheet" href="components/_app/app.css"/>
+  <!-- endbuild -->
 
-  </style>
 
 </head>
 <body class="ng-scope" ng-cloak ng-app="myApp" ng-controller="AppController as app">
@@ -59,7 +53,7 @@
   </div>
 
 
-  <!-- build:js static/bower.js -->
+  <!-- build:js1 static/bower.js -->
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-aria/angular-aria.js"></script>
   <script src="bower_components/angular-animate/angular-animate.js"></script>
@@ -72,7 +66,7 @@
   <script src="bower_components/lodash/lodash.min.js"></script>
   <!-- endbuild -->
 
-  <!-- build:js static/app.js -->
+  <!-- build:js2 static/app.js -->
   <script src="components/_app/app.js"></script>
   <script src="components/_app/config.js"></script>
   <script src="components/_app/routes.js"></script>
@@ -91,9 +85,12 @@
   <script src="components/home/home.js"></script>
   <script src="components/login/login.js"></script>
   <script src="components/login/simpleLogin.js"></script>
-
-
   <!-- endbuild -->
+
+  <!-- build:js3(build/staging) static/templates.js -->
+  <script src="templates.js"></script>
+  <!-- endbuild -->
+
 
 </body>
 </html>
